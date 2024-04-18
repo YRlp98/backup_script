@@ -6,7 +6,8 @@ DB_PASS=""
 DB_NAME=""
 
 # Set backup directory
-BACKUP_DIR=""
+CURRENT_DATE=$(date +"%Y-%m-%d_%H-%M-%S")
+BACKUP_DIR="/$CURRENT_DATE"
 
 # Set remote server details
 REMOTE_SERVER=""
