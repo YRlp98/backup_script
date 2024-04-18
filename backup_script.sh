@@ -21,6 +21,9 @@ APACHE_CONFIG_DIR=""
 ENV_FILES_DIR=""
 IMAGES_DIR=""
 
+# Create backup directory
+mkdir -p "$BACKUP_DIR"
+
 # Database backup
 mariabackup --user="$DB_USER" --password="$DB_PASS" --target-dir="$BACKUP_DIR/database_backup" > /dev/null
 mysqldump --user="$DB_USER" --password="$DB_PASS" "$DB_NAME" > "$BACKUP_DIR/database_backup.sql"
@@ -34,8 +37,11 @@ cp -r "$IMAGES_DIR" "$BACKUP_DIR/images"
 # Get backup of Apache configs
 sudo tar -czvf "$BACKUP_DIR/apache2_backup.tar.gz" "$APACHE_CONFIG_DIR"
 
+# Tar the backup directory with the current date
+tar -czvf "/tmp/$CURRENT_DATE.tar.gz" "$BACKUP_DIR"
+
 # Transfer backup to remote server
-echo "$REMOTE_PASSWORD" | sshpass -p "$REMOTE_PASSWORD" scp -P "$REMOTE_PORT" -r "$BACKUP_DIR"/* "$REMOTE_USER@$REMOTE_SERVER:$REMOTE_BACKUP_DIR"
+echo "$REMOTE_PASSWORD" | sshpass -p "$REMOTE_PASSWORD" scp -P "$REMOTE_PORT" "/tmp/$CURRENT_DATE.tar.gz" "$REMOTE_USER@$REMOTE_SERVER:$REMOTE_BACKUP_DIR"
 
 # Remove Apache backup after transfer
 rm -f "$BACKUP_DIR/apache2_backup.tar.gz"
