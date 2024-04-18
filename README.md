@@ -22,9 +22,9 @@ You can add it to a cron job to schedule and automatically run it.
 5. Set up Cron Job:Open the crontab file:
 ```crontab -e```
 
-Add the following lines to execute the cleanup_script.sh daily at midnight and the backup_script.sh at system reboot:
+Add the following lines to execute the backup_script.sh daily:
 ```
-0 0 * * * /path/to/cleanup_script.sh
+0 0 * * * /path/to/backup_script.sh
 ```
 
 ## Cleanup Script
