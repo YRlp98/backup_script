@@ -49,5 +49,8 @@ rm -f "$BACKUP_DIR/apache2_backup.tar.gz"
 # Delete everything inside the backup directory except backup_script.sh
 find "$BACKUP_DIR" -mindepth 1 ! -name 'backup_script.sh' -delete
 
+# Remove backup directory after transfer
+rm -rf "$BACKUP_DIR"
+
 # Message indicating completion
 echo "All backup tasks completed successfully."
