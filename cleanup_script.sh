@@ -7,7 +7,7 @@ BACKUP_DIR="/root/backups"
 cd "$BACKUP_DIR" || exit
 
 # Get a list of all backup files sorted by modification time (oldest first)
-backup_files=$(ls -t | grep -E '^\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.tar\.gz$')
+backup_files=$(ls -t)
 
 # Count the number of backup files
 num_files=$(echo "$backup_files" | wc -l)
