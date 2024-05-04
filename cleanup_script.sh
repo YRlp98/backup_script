@@ -12,10 +12,10 @@ backup_files=$(ls -t)
 # Count the number of backup files
 num_files=$(echo "$backup_files" | wc -l)
 
-# Check if there are more than 3 backup files
-if [ "$num_files" -gt 3 ]; then
+# Check if there are more than 4 backup files
+if [ "$num_files" -gt 4 ]; then
     # Calculate the number of files to delete
-    num_to_delete=$((num_files - 3))
+    num_to_delete=$((num_files - 4))
     
     # Delete the oldest backup files
     echo "Deleting $num_to_delete old backup files..."
